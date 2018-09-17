@@ -36,10 +36,10 @@
 		["1-1.jpg","1-2.jpg"],
 	   [ "2-1.jpg","2-2.jpg"],
 	  ["3-1.jpg","3-2.jpg"],
-	   ["4-1.jpg","4-2.jpg"],	   
-	   ["5-1.jpg","5-2.jpg"] 
+	   ["4-1.jpg","4-2.jpg"],
+	   ["5-1.jpg","5-2.jpg"]
 	]
-	
+
 //deck holds info on the cards: the location and dimensions, the src for the picture
 // and identifying info
 //the info is set using the array of arrays in the makedeck function
@@ -74,18 +74,18 @@ function makedeck() {
 	var cy = firstsy;
 	for(i=0;i<pairs.length;i++) {
 		pica = new Image();
-		pica.src = pairs[i][0];
+		pica.src = "versions/<?=$_GET['title']?>/" + pairs[i][0];
 		acard = new Card(cx,cy,cardwidth,cardheight,pica,i);
 		deck.push(acard);
 		picb = new Image();
-		picb.src = pairs[i][1];		
+		picb.src = "versions/<?=$_GET['title']?>/" + pairs[i][1];		
 		bcard = new Card(cx,cy+cardheight+margin,cardwidth,cardheight,picb,i);
 		deck.push(bcard);
 		cx = cx+cardwidth+ margin;
 		acard.draw();
 		bcard.draw();
 	}
-	
+
 }
 
 function shuffle() {
@@ -112,7 +112,7 @@ var nt;
 
 function drawback() {
 	ctx.fillStyle = backcolor;
-	ctx.fillRect(this.sx,this.sy,this.swidth,this.sheight);	
+	ctx.fillRect(this.sx,this.sy,this.swidth,this.sheight);
 }
 
 
@@ -143,11 +143,11 @@ function choose(ev) {
 		if (firstpick) {
 			firstcard = i;
 			firstpick = false;
-			ctx.drawImage(card.img,card.sx,card.sy,card.swidth,card.sheight); 
+			ctx.drawImage(card.img,card.sx,card.sy,card.swidth,card.sheight);
 		}
 		else {
 			secondcard = i;
-			ctx.drawImage(card.img,card.sx,card.sy,card.swidth,card.sheight); 
+			ctx.drawImage(card.img,card.sx,card.sy,card.swidth,card.sheight);
 		  	if (card.info==deck[firstcard].info) {
 				matched = true;
 				count++;
@@ -158,7 +158,7 @@ function choose(ev) {
 				if (count>= .5*deck.length) {
 					var now = new Date();
 					var nt = Number(now.getTime());
-					var seconds = Math.floor(.5+(nt-starttime)/1000); 
+					var seconds = Math.floor(.5+(nt-starttime)/1000);
 					ctx.fillStyle= tablecolor;
 					ctx.fillRect(0,0,900,400);
 					ctx.fillStyle=backcolor;
@@ -167,7 +167,7 @@ function choose(ev) {
 					ctx.fillText("Re-load the page to try again.",10,300);
 					return;
 				}
-				
+
 			}
 			else {
 				matched = false;
@@ -194,19 +194,19 @@ function flipback() {
 }
 
 function init(){
-   show_image('logo.gif', 100,  40,  'Logo') 
-   ctx = document.getElementById('canvas').getContext('2d'); 
+   show_image('logo.gif', 100,  40,  'Logo')
+   ctx = document.getElementById('canvas').getContext('2d');
    canvas1 = document.getElementById('canvas');
    canvas1.addEventListener('click',choose,false);
    makedeck();
    shuffle();
    ctx.font="bold 20pt sans-serif";
- 
+
    ctx.fillText("Click on two cards to make a match.",10,20);
    ctx.fillText("Number of matches so far: 0",10,360);
    starttime = new Date();
    starttime = Number(starttime.getTime());
-  } 
+  }
 
 
 
@@ -214,10 +214,10 @@ function init(){
 
 </script>
 </head>
-<body onLoad="init();">  
+<body onLoad="init();">
 <canvas id="canvas" width="900" height="400">
 Your browser doesn't support the HTML5 element canvas.
-</canvas>  
+</canvas>
 <br/>
 
 
